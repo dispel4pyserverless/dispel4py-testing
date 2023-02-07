@@ -1,1 +1,77 @@
+**SIMPLE**
 
+COMMAND LINE EXECUTION
+COMMAND: python -m dispel4py.new.processor simple dispel4py.examples.graph_testing.word_count -i 5
+OUTPUT:
+Processing 5 iterations.
+RUN ARGS:
+Namespace(attr=None, data=None, file=None, iter=5, module='dispel4py.examples.graph_testing.word_count', provenance=None, target='simple')
+==========
+Inputs: {'RandomWordProducer0': 5}
+SimplePE: Processed 1 iteration.
+Outputs: {'WordCounter1': {'output': [['Earthquake', 1], ['Earthquake', 2], ['Earthquake', 3], ['Seismology', 1], ['Analysis', 1]]}}
+
+APPLICATION PROCCESS 
+COMMAND: simple_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]})
+OUTPUT:
+Inputs: {'SplitLines0': [{'input': 'Hello Hello algo mas World World'}]}
+SimplePE: Processed 1 iteration.
+Outputs: {'CountWords2': {'output': [defaultdict(<class 'int'>, {'Hello': 2, 'algo': 1, 'mas': 1, 'World': 2})]}}
+
+SERVERLESS 
+COMMAND: client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],arg=edict({'iter':5}))
+OUTPUT: 
+Executing workflow with simple process
+Inputs: {'SplitLines0': [{'input': 'Hello Hello algo mas World World'}]}
+SimplePE: Processed 1 iteration.
+Outputs: {'CountWords2': {'output': [defaultdict(<class 'int'>, {'Hello': 2, 'algo': 1, 'mas': 1, 'World': 2})]}}
+
+**MULTI** 
+
+COMMAND LINE EXECUTION
+COMMAND: python -m dispel4py.new.processor multi  dispel4py.examples.graph_testing.word_count -n 5 -i 5
+OUTPUT:
+Processing 5 iterations.
+RUN ARGS:
+Namespace(attr=None, data=None, file=None, iter=5, module='dispel4py.examples.graph_testing.word_count', num=5, provenance=None, simple=False, target='multi')
+==========
+Processes: {'RandomWordProducer0': range(0, 1), 'WordCounter1': range(1, 4)}
+RandomWordProducer0 (rank 0): Processed 5 iterations.
+WordCounter1 (rank 1): Processed 0 iterations.
+WordCounter1 (rank 3): Processed 4 iterations.
+WordCounter1 (rank 2): Processed 1 iteration.
+
+APPLICATION PROCCESS 
+COMMAND: multi_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5, 'iter': 5,'simple': False}))
+OUTPUT:
+Processes: {'SplitLines0': range(0, 1), 'SplitWords1': range(1, 3), 'CountWords2': range(3, 5)}
+SplitLines0 (rank 0): Processed 1 iteration.
+SplitWords1 (rank 1): Processed 1 iteration.
+SplitWords1 (rank 2): Processed 0 iterations.
+CountWords2 (rank 3): Processed 4 iterations.
+CountWords2 (rank 4): Processed 2 iterations.
+
+SERVERLESS 
+COMMAND: client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],Process=Process.MULTI,args=edict({'num':5, 'iter': 5,'simple': False}))
+OUTPUT: 
+Executing workflow with multi process
+Processes: {'SplitLines0': range(0, 1), 'SplitWords1': range(1, 3), 'CountWords2': range(3, 5)}
+SplitLines0 (rank 0): Processed 1 iteration.
+SplitWords1 (rank 2): Processed 0 iterations.
+SplitWords1 (rank 1): Processed 1 iteration.
+CountWords2 (rank 3): Processed 2 iterations.
+CountWords2 (rank 4): Processed 4 iterations.
+
+**REDIS***
+
+TODO!
+
+
+
+
+
+
+//NOTE - only 1 iteration is processed here? how to specify multiple iterations
+:param inputs: inputs for root PEs of the graphs. This is a dictionary
+mapping a PE id to either a non-negative integer (the number of iterations) or a list of input data items.
+//  
