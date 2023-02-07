@@ -7,7 +7,7 @@ SimplePE: Processed 1 iteration.
 Outputs: {'CountWords2': {'output': [defaultdict(<class 'int'>, {'Hello': 2, 'algo': 1, 'mas': 1, 'World': 2})]}}
 
 SERVERLESS 
-COMMAND: client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],arg=edict({'iter':5}))
+COMMAND: client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}])
 OUTPUT: 
 Executing workflow with simple process
 Inputs: {'SplitLines0': [{'input': 'Hello Hello algo mas World World'}]}
