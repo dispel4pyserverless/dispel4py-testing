@@ -57,7 +57,9 @@ CountWords2 (rank 4): Processed 4 iterations.
 #### Redis
 ### Application 
 #### COMMAND: 
-```dyn_process(graph,  {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))```
+```
+dyn_process(graph,  {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))
+```
 OUTPUT:
 
 ### Serverless
