@@ -101,3 +101,4 @@ TERMINATED: stateless process:1 ends now
 TERMINATED: stateful process:4 for instance:CountWords2_0 ends now
 ELAPSED TIME(minus 10 second(s) for AUTO_TERMINATE): 4.125723600387573
 ```
+(Note: this output will be printed at the execution server console -- pending update)
