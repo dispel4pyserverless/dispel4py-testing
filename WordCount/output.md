@@ -58,13 +58,46 @@ CountWords2 (rank 4): Processed 4 iterations.
 ### Application 
 #### COMMAND: 
 ```
-dyn_process(graph,  {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))
+split.name = 'producer'
+dyn_process(graph,  {'producer': [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))
 ```
 OUTPUT:
+```
+Starting 5 workers communicating
+process:4 for instance:CountWords2_0 redis connection created.
+process:0 for instance:None redis connection created.
+'SplitLines' object has no attribute 'rank'
+process:1 for instance:None redis connection created.
+process:2 for instance:None redis connection created.
+process:3 for instance:None redis connection created.
+TERMINATED: stateless process:2 ends now
+TERMINATED: stateless process:3 ends now
+TERMINATED: stateless process:1 ends now
+TERMINATED: stateless process:0 ends now
+TERMINATED: stateful process:4 for instance:CountWords2_0 ends now
+ELAPSED TIME(minus 10 second(s) for AUTO_TERMINATE): 4.152126789093018
+Begin to clean redis stream keys...
+```
 
 ### Serverless
-COMMAND:
-OUTPUT:
-
-
--- Note how to specify iterations in simple process 
+#### COMMAND:
+```
+client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],process=Process.DYNAMIC,args= edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))
+```
+#### OUTPUT:
+```
+Executing workflow with dynamic process
+Starting 5 workers communicating
+process:4 for instance:CountWords2_0 redis connection created.
+process:0 for instance:None redis connection created.
+process:1 for instance:None redis connection created.
+'SplitLines' object has no attribute 'rank'
+process:2 for instance:None redis connection created.
+process:3 for instance:None redis connection created.
+TERMINATED: stateless process:3 ends now
+TERMINATED: stateless process:2 ends now
+TERMINATED: stateless process:0 ends now
+TERMINATED: stateless process:1 ends now
+TERMINATED: stateful process:4 for instance:CountWords2_0 ends now
+ELAPSED TIME(minus 10 second(s) for AUTO_TERMINATE): 4.125723600387573
+```
