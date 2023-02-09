@@ -1,7 +1,9 @@
 ## Simple Execution
 ### Application
 #### COMMAND: 
-```simple_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]})```
+```
+simple_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]})
+```
 #### OUTPUT:
 ```
 Inputs: {'SplitLines0': [{'input': 'Hello Hello algo mas World World'}]}
@@ -11,7 +13,9 @@ Outputs: {'CountWords2': {'output': [defaultdict(<class 'int'>, {'Hello': 2, 'al
 
 ### Serverless
 #### COMMAND: 
-```client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],args=edict({'iter':5}))```
+```
+client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],args=edict({'iter':5}))
+```
 #### OUTPUT:
 ```
 Executing workflow with simple process
@@ -22,7 +26,9 @@ Outputs: {'CountWords2': {'output': [defaultdict(<class 'int'>, {'Hello': 2, 'al
 ## Multi Execution
 ### Application
 #### COMMAND:
-```multi_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5, 'iter': 5,'simple': False}))```
+```
+multi_process(graph, {split: [ {'input' : "Hello Hello algo mas World World"}]}, edict({'num':5, 'iter': 5,'simple': False}))
+```
 #### OUTPUT:
 ```
 Processes: {'SplitLines0': range(0, 1), 'SplitWords1': range(1, 3), 'CountWords2': range(3, 5)}
@@ -34,7 +40,9 @@ CountWords2 (rank 4): Processed 2 iterations.
 ```
 ### Serverless 
 #### COMMAND: 
-```client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],process=Process.MULTI,args=edict({'num':5, 'iter': 5,'simple': False}))```
+```
+client.run(graph,input=[{'input' : "Hello Hello algo mas World World"}],process=Process.MULTI,args=edict({'num':5, 'iter': 5,'simple': False}))
+```
 #### OUTPUT:
 ```
 Executing workflow with multi process
