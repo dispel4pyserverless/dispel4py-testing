@@ -99,11 +99,7 @@ extracted column: MType = SO-a
 extracted column: logR25 = 0.37
 reading VOTable RA=2.77662, DEC=2.6780
 extracted column: MType = Sb
-extracted column: logR25 = 0.36
-!! DATA mytype:SBbc, logr25:0.35
-internal extinction: [1, '0.77345', '-1.9143', 'SBbc', 0.35, 4.0, 0.5533987734977625]
-!! DATA mytype:SBc, logr25:0.15
-internal extinction: [2, '0.83487', '29.7972', 'SBc', 0.15, 6.0, 0.26600839090866996]
+...
 ```
 ### Serverless
 #### COMMAND:
@@ -151,14 +147,68 @@ reading VOTable RA=3.15941, DEC=5.5053
 ### Application 
 #### COMMAND: 
 ```
+read.name = 'producer'
+dyn_process(graph, {'producer': [{"input" : "resources/coordinates.txt"} ]}, edict({'num':5,'iter':10, 'simple':False, 'redis_ip':'localhost', 'redis_port':'6379'}))
 ```
 #### OUTPUT:
 ```
+Starting 5 workers communicating
+process:0 for instance:None redis connection created.
+process:1 for instance:None redis connection created.
+Reading file resources/coordinates.txt
+process:2 for instance:None redis connection created.
+reading VOTable RA=0.77345, DEC=-1.9143
+process:3 for instance:None redis connection created.
+process:4 for instance:None redis connection created.
+reading VOTable RA=0.83487, DEC=29.7972
+reading VOTable RA=0.84108, DEC=30.7821
+reading VOTable RA=0.99487, DEC=20.7524
+reading VOTable RA=1.97625, DEC=20.4123
+reading VOTable RA=2.22791, DEC=23.8174
+reading VOTable RA=2.77662, DEC=2.6780
+reading VOTable RA=3.03766, DEC=12.0455
+reading VOTable RA=3.15941, DEC=5.5053
+reading VOTable RA=3.25308, DEC=39.2458
+reading VOTable RA=3.63283, DEC=-0.7362
+reading VOTable RA=3.99000, DEC=14.0752
+reading VOTable RA=4.06195, DEC=10.3320
+reading VOTable RA=4.72170, DEC=10.5941
+reading VOTable RA=5.27725, DEC=26.5133
+reading VOTable RA=5.39700, DEC=1.1655
+...
 ```
 ### Serverless
 #### COMMAND:
 ```
+client.run(graph,input=[{"input" : "resources/coordinates.txt"} ], args=edict({'num':5,'simple':False,'redis_ip':'localhost','redis_port':'6379'}),process=Process.DYNAMIC,resources=True)
 ```
 #### OUTPUT:
 ```
+Executing workflow with dynamic process
+Starting 5 workers communicating
+process:0 for instance:None redis connection created.
+process:1 for instance:None redis connection created.
+process:2 for instance:None redis connection created.
+Reading file resources/coordinates.txt
+process:3 for instance:None redis connection created.
+process:4 for instance:None redis connection created.
+reading VOTable RA=0.83487, DEC=29.7972
+reading VOTable RA=0.84108, DEC=30.7821
+reading VOTable RA=0.77345, DEC=-1.9143
+reading VOTable RA=0.99487, DEC=20.7524
+reading VOTable RA=1.97625, DEC=20.4123
+reading VOTable RA=2.22791, DEC=23.8174
+reading VOTable RA=2.77662, DEC=2.6780
+reading VOTable RA=3.03766, DEC=12.0455
+reading VOTable RA=3.15941, DEC=5.5053
+reading VOTable RA=3.25308, DEC=39.2458
+reading VOTable RA=3.63283, DEC=-0.7362
+reading VOTable RA=3.99000, DEC=14.0752
+reading VOTable RA=4.06195, DEC=10.3320
+reading VOTable RA=4.72170, DEC=10.5941
+reading VOTable RA=5.27725, DEC=26.5133
+reading VOTable RA=5.39700, DEC=1.1655
+reading VOTable RA=5.83791, DEC=1.8465
+reading VOTable RA=5.97291, DEC=28.3333
+...
 ```
